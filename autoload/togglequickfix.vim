@@ -69,7 +69,10 @@ fun! togglequickfix#Loop() "{{{
         let status = s:sts[status]
         if status[0] == 'q'
             if togglequickfix#Has('qf')
-                copen
+                execute winwidth(0) * 2 < winheight(0) * 5 ?
+                \ printf("copen %d", winheight(0)/2) :
+                \ printf("vertical copen %d", winwidth(0)/2)
+                \ | wincmd p
             else
                 continue
             endif
@@ -79,7 +82,10 @@ fun! togglequickfix#Loop() "{{{
 
         if status[1] == 'l'
             if togglequickfix#Has('locl')
-                lopen
+                execute winwidth(0) * 2 < winheight(0) * 5 ?
+                \ printf("lopen %d", winheight(0)/2) :
+                \ printf("vertical lopen %d", winwidth(0)/2)
+                \ | wincmd p
             else
                 continue
             endif
